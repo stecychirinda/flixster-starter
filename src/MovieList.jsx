@@ -8,25 +8,24 @@ function MovieList() {
     const [error, setError] = useState(null)
     const [page, setPage] = useState(1)
     const [hasMore, setHasMore] = useState(true)
+    let isDataInitialized = false;
 
     const fetchData = async (pageToFetch) => {
 
             const apiKey = import.meta.env.VITE_API_KEY
-            const url = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1${pageToFetch}`;
+            const url = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${pageToFetch}`;
             const options = {
             method: 'GET',
             headers: {
                 accept: 'application/json',
-                Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzOGI2N2MyMDMzOGE1OGIxNGE4MWU3NGEzMjEwZDk0NyIsIm5iZiI6MTc0OTUwOTc1MC4yMjg5OTk5LCJzdWIiOiI2ODQ3NjY3NmU5Y2E4YTdiM2MzZmNjMTMiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.Qf1y307rFLFYgFWJtkMGUzyoYMhh25W5QDzQmVO0Hv8`
+                Authorization: `Bearer ${apiKey}`
             }
             };
-            console.log("Fetching my data now")
-
                 fetch(url, options)
                 .then(res => res.json())
                 .then(data => {
                     console.log(data)
-                    setMovies(data.results)
+                    setMovies([...movies,...data.results])
                     setError(null)
                     if (pageToFetch >= data.total_pages){
                         setHasMore(false)
@@ -42,18 +41,10 @@ function MovieList() {
          }
 
     useEffect(() => {
+        if (isDataInitialized)return
           fetchData(page)
-        //console.log("fetching data",page)
+        isDataInitialized = true;
     }, []);
-
-    // useEffect(() =>{
-    // const loadMore = () => {
-    //     const newPage = page + 1
-    //     setMovies((movies)=> [...movies, ...data.results])
-    //     setPage(newPage)
-    //     fetchData(newPage)
-    // }
-    // }, []);
 
     const loadMore = () =>{
         console.log("loadMore")
@@ -61,8 +52,6 @@ function MovieList() {
         console.log(statePage)
         setPage(statePage)
         fetchData(statePage)
-
-
     }
 
     return (
