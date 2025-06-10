@@ -1,0 +1,20 @@
+.movie {
+    background-color: #656262;
+    margin:10px;
+    border-radius: 10px;
+    width: 300px;
+    overflow-y: auto;
+    box-shadow: 0 5px 15px rgba(37, 31, 31, 0.931);
+    position: relative;
+
+}
+
+.img {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.movie-info {
+    color: #fff;
+}
