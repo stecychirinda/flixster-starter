@@ -1,4 +1,4 @@
-import './Modal.css'
+import './CardModal.css'
 
 const CardModal = ({movie,onClose})=>{
     return (
