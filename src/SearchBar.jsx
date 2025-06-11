@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import './SearchBar.css'
 
-function SearchBar ({onMovieTitle}){
+function SearchBar ({onMovieTitle,onClear}){
     const [input,setInput] = useState('');
 
     const handleSubmit = (e) => {
@@ -9,6 +9,11 @@ function SearchBar ({onMovieTitle}){
         if (input.trim()){
             onMovieTitle(input.trim());
         }
+    };
+
+    const handleClear = () => {
+        setInput('');
+        onClear();
     };
 
   return (
@@ -19,6 +24,7 @@ function SearchBar ({onMovieTitle}){
         value={input}
         onChange={(e)=> setInput(e.target.value)}/>
       <button className="search-button" type="submit"> Search</button>
+      <button className="clear-button" type="button" onClick={handleClear}> Clear</button>
     </form>
   );
 }
