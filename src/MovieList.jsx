@@ -2,7 +2,7 @@ import "./MovieList.css"
 import { useState, useEffect } from 'react'
 import MovieCard from "./MovieCard.jsx"
 
-function MovieList() {
+function MovieList({}) {
     const [movies, setMovies] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(null)

@@ -1,21 +1,24 @@
-import React from 'react'
+import {useState} from 'react'
 import './SearchBar.css'
 
-function SearchBar({ onMovieTitle}) {
+function SearchBar ({onMovieTitle}){
+    const [input,setInput] = useState('');
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    const formData = new FormData(event.target)
-    const movieName = formData.get('movie-title')
-    onMovieTitle(movieName)
-    event.target.reset();
-
-  };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (input.trim()){
+            onMovieTitle(input.trim());
+        }
+    };
 
   return (
     <form className="search-form" onSubmit={handleSubmit}>
-      <input className="search-input" type="text" name="movie-title" placeholder="Enter movie title" />
-      <button className="search-button" type="submit">🔍 Search</button>
+      <input className="search-input"
+        type="text"
+        placeholder="Search for a movie"
+        value={input}
+        onChange={(e)=> setInput(e.target.value)}/>
+      <button className="search-button" type="submit"> Search</button>
     </form>
   );
 }
