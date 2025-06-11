@@ -4,8 +4,8 @@ import MovieCard from "./MovieCard.jsx"
 import CardModal from "./CardModal.jsx"
 const apiSecret = import.meta.env.VITE_API_SECRET
 
-function MovieList({ }) {
-    const [movies, setMovies] = useState([])
+
+function MovieList({ sortResults, movies, setMovies ,results}) {
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(null)
     const [page, setPage] = useState(1)
@@ -28,7 +28,6 @@ function MovieList({ }) {
         fetch(url, options)
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 setMovies([...movies, ...data.results])
                 setError(null)
                 if (pageToFetch >= data.total_pages) {
@@ -37,7 +36,6 @@ function MovieList({ }) {
                 setIsLoading(false)
             })
             .catch(err => {
-                console.error(err)
                 setError("Error fetching data");
                 setIsLoading(false);
             });
@@ -51,9 +49,7 @@ function MovieList({ }) {
     }, []);
 
     const loadMore = () => {
-        console.log("loadMore")
         const statePage = page + 1
-        console.log(statePage)
         setPage(statePage)
         fetchData(statePage)
 
@@ -64,13 +60,23 @@ function MovieList({ }) {
         setSelectedCard(dataSet);
     }
 
+    const getCurrentData = () => {
+        if(sortResults.length > 0) {
+            return sortResults
+        }
+        else if (results.length>0){
+            return results
+        }else {
+            return movies
+        }
+    }
 
 return (
     <>
         <div className="movie-list">
             {isLoading && <div>Loading...</div>}
             {error && <p>{error}</p>}
-            {movies.map((movie, index) => (
+            {getCurrentData().map((movie, index) => (
                 <MovieCard
                     key={`{movie.id}-${index}`}
                     title={movie.title}
