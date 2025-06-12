@@ -24,7 +24,7 @@ function MovieCard({ title, url, rating, onClick}) {
                     {formattedRating}
                 </span>
                 <button className="like" onClick={handleLike}>{liked?"❤️":"🤍"}</button>
-                <button className="watched" onClick={handleWatched}>{watched?"👀":"👁"}</button>
+                <button className="watched" onClick={handleWatched}>{watched?"☑️":"🎬"}</button>
             </div>
         </div>)
 }

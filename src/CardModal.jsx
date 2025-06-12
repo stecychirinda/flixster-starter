@@ -1,4 +1,5 @@
 import './CardModal.css'
+import MovieTrailer from './MovieTrailer'
 
 const CardModal = ({movie,onClose})=>{
     return (
@@ -11,6 +12,7 @@ const CardModal = ({movie,onClose})=>{
                 <p>Release date: {movie.release_date}</p>
                 <p>Overview: {movie.overview}</p>
                 <p>Genres: {movie.genres?.map(g=>g.name).join(",")}</p>
+                <MovieTrailer trailerKey={movie.trailerKey}/>
                 <button onClick={onClose}>Close</button>
             </div>
         </div>)

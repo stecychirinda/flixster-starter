@@ -55,10 +55,25 @@ function MovieList({ sortResults, movies, setMovies ,results}) {
 
     }
     const handleModal = async (movie_id) => {
-        const response = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}?api_key=${apiSecret}`);
-        const dataSet = await response.json();
-        setSelectedCard(dataSet);
+        try{
+            const response = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}?api_key=${apiSecret}`);
+            const dataSet = await response.json();
+
+            const trailerResult = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=${apiSecret}`);
+            const trailerData = await trailerResult.json();
+
+            const trailer = trailerData.results.find(
+                (vid)=> vid.type ==="Trailer" && vid.site ==="YouTube"
+            );
+            const fullData ={
+                ...dataSet,
+                trailerKey: trailer?.key || null,
+            };
+        setSelectedCard(fullData);
+    } catch(error){
     }
+}
+
 
     const getCurrentData = () => {
         if(sortResults.length > 0) {
@@ -82,7 +97,7 @@ return (
                     title={movie.title}
                     url={movie.poster_path}
                     rating={movie.vote_average}
-                    onClick={() => handleModal(movie.id)}
+                    onClick={() => handleModal(movie.id)}// make this do two things , handletrailer
                 />
             ))}
         </div>
