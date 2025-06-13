@@ -1,5 +1,5 @@
 import "./MovieList.css"
-import MovieCard from "./MovieCard.jsx"
+import MovieCard from "../MovieCard.jsx"
 
 
 function WatchedList({ watched }) {

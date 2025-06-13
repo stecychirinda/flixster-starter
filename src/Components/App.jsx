@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import MovieList from './MovieList'
-import Header from './Header'
-import Footer from './Footer'
-import NavBar from './NavBar'
-import FavoriteList from './FavoriteList'
+import MovieList from '../MovieList'
+import Header from '../Header'
+import Footer from '../Footer'
+import NavBar from '../NavBar'
+import FavoriteList from '../FavoriteList'
 import WatchedList from './WatchedList'
 
 const apiSecret = import.meta.env.VITE_API_SECRET
