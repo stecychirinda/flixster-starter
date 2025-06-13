@@ -1,0 +1,38 @@
+.navbar {
+
+  text-align: left;
+  align-content: end;
+  /* background-color: aqua; */
+
+  display: flex;
+  flex-direction: column;
+
+  position: fixed;
+  height: 100vh;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+}
+
+#this{
+  display:flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  align-content: left;
+  padding: 0px;
+  margin: 0px;
+}
+
+.nav-menu-items a, .nav-menu-items li
+{
+    text-decoration: none;
+    list-style: none;
+}
+.nav-menu {
+    display: none;
+}
+
+.nav-menu.active{
+    display: block;
+}

@@ -3,15 +3,27 @@ import './App.css'
 import MovieList from './MovieList'
 import Header from './Header'
 import Footer from './Footer'
+import NavBar from './NavBar'
+import FavoriteList from './FavoriteList'
+import WatchedList from './WatchedList'
 
 const apiSecret = import.meta.env.VITE_API_SECRET
 
+const Pages = {
+  Home: 'HOME',
+  Favorites: 'FAVORITES',
+  Watched: 'WATCHED'
+};
+
 const App = () => {
   const [movies, setMovies] = useState([])
+  const [favorites, setFavorites] = useState([])
+  const [watched, setWatched] = useState([])
   const [results, setResults] = useState([])
   const [sortResults, setSortResults] = useState([])
   const [error, setError] = useState("")
   const [sortCriteria, setSortCriteria] = useState('')
+  const [currentPage, setCurrentPage] = useState(Pages.Home)
 
   useEffect(() => {
     let tempResults = [...movies]
@@ -47,24 +59,56 @@ const App = () => {
         return;
     }
     setResults(data.results);
-
     } catch (error){
       console.error("Fetch error:",error)
       setError("Something went wrong")
     }
  };
 
+ const handleFavorite = (movie) => {
+  setFavorites(prev => {
+    const isAlreadyFav = prev.some(fav => fav.id === movie.id)
+    if (!isAlreadyFav) {
+      return [...prev, movie];
+    }
+    return prev;
+  })
+ }
+ console.log(favorites)
 
-  const clearSearch = () => {
-    setResults([]);
-    setError("");
-  };
+ const handleWatched = (movie) => {
+  setWatched(prev => {
+    const isAlreadyWatched = prev.some(watch => watch.id === movie.id)
+    if (!isAlreadyWatched) {
+      return [...prev, movie];
+    }
+    return prev;
+  })
+ }
 
+
+
+ const clearSearch = () => {
+  setResults([]);
+  setError("");
+};
+  const getCurrentPage = () => {
+    switch (currentPage) {
+      case Pages.Home:
+        return  <MovieList sortResults={sortResults.length > 0 ? sortResults : []}  results={results.length>0? results: []} movies={movies} setMovies={setMovies} handleFavorite={handleFavorite} handleWatched={handleWatched}/>
+      case Pages.Favorites:
+        return <FavoriteList favorites={favorites} />
+      case Pages.Watched:
+        return <WatchedList watched={watched} />
+      default:
+        <MovieList sortResults={sortResults.length > 0 ? sortResults : []}  results={results.length>0? results: []} movies={movies} setMovies={setMovies} handleFavorite={handleFavorite} handleWatched={handleWatched}/>
+    }
+  }
 
   return (
     <div className="App">
       <h1>Welcome to Flixster</h1>
-
+      <NavBar setCurrentPage={(page) => setCurrentPage(page)} />
       <select className="select"
         defaultValue={""}
         onChange={(e)=> setSortCriteria(e.target.value) }>
@@ -73,14 +117,12 @@ const App = () => {
         <option value="release_date">Release Date</option>
         <option value="vote_average">Rating</option>
       </select>
-
       <Header onSearch={fetchMovie} onClear={clearSearch}/>
+      {getCurrentPage()}
       {error && <p className="error">{error}</p>}
-      <MovieList sortResults={sortResults.length > 0 ? sortResults : []}  results={results.length>0? results: []} movies={movies} setMovies={setMovies} />
-
       <Footer />
     </div>
   )
-};
 
+}
 export default App;

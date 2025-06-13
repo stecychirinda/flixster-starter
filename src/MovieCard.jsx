@@ -1,18 +1,20 @@
 import "./MovieCard.css"
 import {useState} from "react"
 
-function MovieCard({ title, url, rating, onClick}) {
+function MovieCard({ title, url, rating, onClick,onLike,onWatched}) {
 
     const [liked,setLiked] = useState(false)
     const [watched,setWatched] = useState(false)
 
     const handleLike = (e) => {
         e.stopPropagation()
-        setLiked(!liked)}
+        setLiked(!liked)
+        onLike && onLike()}
 
     const handleWatched = (e) => {
         e.stopPropagation()
-        setWatched(!watched)}
+        setWatched(!watched)
+        onWatched && onWatched()}
 
     const formattedRating = rating.toFixed(2);
     return (
@@ -23,7 +25,7 @@ function MovieCard({ title, url, rating, onClick}) {
                 <span className={`tag ${rating >= 8 ? "green" : "orange"}`}>
                     {formattedRating}
                 </span>
-                <button className="like" onClick={handleLike}>{liked?"❤️":"🤍"}</button>
+                <button className="like" onClick={handleLike} >{liked?"❤️":"🤍"}</button>
                 <button className="watched" onClick={handleWatched}>{watched?"☑️":"🎬"}</button>
             </div>
         </div>)

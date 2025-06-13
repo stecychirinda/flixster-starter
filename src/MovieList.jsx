@@ -5,7 +5,7 @@ import CardModal from "./CardModal.jsx"
 const apiSecret = import.meta.env.VITE_API_SECRET
 
 
-function MovieList({ sortResults, movies, setMovies ,results}) {
+function MovieList({ sortResults, movies, setMovies ,results,handleFavorite,handleWatched}) {
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(null)
     const [page, setPage] = useState(1)
@@ -39,9 +39,7 @@ function MovieList({ sortResults, movies, setMovies ,results}) {
                 setError("Error fetching data");
                 setIsLoading(false);
             });
-
     }
-
     useEffect(() => {
         if (isDataInitialized) return
         fetchData(page)
@@ -52,7 +50,6 @@ function MovieList({ sortResults, movies, setMovies ,results}) {
         const statePage = page + 1
         setPage(statePage)
         fetchData(statePage)
-
     }
     const handleModal = async (movie_id) => {
         try{
@@ -73,9 +70,8 @@ function MovieList({ sortResults, movies, setMovies ,results}) {
     } catch(error){
     }
 }
-
-
     const getCurrentData = () => {
+        console.log('sortResults: ', sortResults)
         if(sortResults.length > 0) {
             return sortResults
         }
@@ -97,7 +93,9 @@ return (
                     title={movie.title}
                     url={movie.poster_path}
                     rating={movie.vote_average}
-                    onClick={() => handleModal(movie.id)}// make this do two things , handletrailer
+                    onClick={() => handleModal(movie.id)}
+                    onLike ={()=> handleFavorite(movie)}
+                    onWatched ={()=> handleWatched(movie)}
                 />
             ))}
         </div>
@@ -112,5 +110,4 @@ return (
     </>
 )
 }
-
 export default MovieList
