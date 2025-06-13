@@ -1,5 +1,4 @@
 .navbar {
-
   text-align: left;
   align-content: end;
   /* background-color: aqua; */
@@ -14,8 +13,8 @@
   z-index: 100;
 }
 
-#this{
-  display:flex;
+#this {
+  display: flex;
   flex-direction: column;
   align-items: left;
   justify-content: left;
@@ -24,15 +23,15 @@
   margin: 0px;
 }
 
-.nav-menu-items a, .nav-menu-items li
-{
-    text-decoration: none;
-    list-style: none;
+.nav-menu-items a,
+.nav-menu-items li {
+  text-decoration: none;
+  list-style: none;
 }
 .nav-menu {
-    display: none;
+  display: none;
 }
 
-.nav-menu.active{
-    display: block;
+.nav-menu.active {
+  display: block;
 }

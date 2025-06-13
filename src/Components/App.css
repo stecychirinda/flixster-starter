@@ -25,10 +25,30 @@
 
   .search-bar form {
     flex-direction: column;
-
   }
+}
 
-  .select {
-    object-position: left ;
-  }
+.select {
+  height: 25px;
+  width: 150px;
+}
+.header {
+  height: 25px;
+  width: 300px;
+}
+
+.sort {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 20px;
+}
+
+.Title {
+  color: #eee;
+  font-size: 3rem;
+  font-weight: 800;
+  text-shadow: 5px 5px 5px rgba(188, 147, 147, 0.5);
+  letter-spacing: 1px;
 }
