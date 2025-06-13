@@ -25,7 +25,7 @@ function NavBar({ setCurrentPage }) {
             </div>
           </li>
           {SideBarData.map((item, index) => (
-            <li key={index} className={item.cName} id="this">
+            <li key={index} className={item.cName} id="nav_pop">
               <button onClick={() => handlePageChange(item.page)}>
                 {item.icon}
                 <span>{item.title}</span>

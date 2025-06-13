@@ -13,12 +13,12 @@
   z-index: 100;
 }
 
-#this {
+#nav_pop {
   display: flex;
   flex-direction: column;
-  align-items: left;
-  justify-content: left;
-  align-content: left;
+  align-items: right;
+  justify-content: right;
+  align-content: right;
   padding: 0px;
   margin: 0px;
 }
@@ -27,11 +27,19 @@
 .nav-menu-items li {
   text-decoration: none;
   list-style: none;
+  margin: 5px;
 }
+.nav-menu-items{
+  margin-left: 0px;
+  padding: 0px;
+}
+
 .nav-menu {
   display: none;
 }
-
 .nav-menu.active {
   display: block;
+  margin-left: 0px;
+  justify-content: right;
+  align-items: right;
 }

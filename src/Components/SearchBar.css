@@ -1,0 +1,13 @@
+.search-button{
+    margin: 10px;
+    box-shadow: 1px 1px 1px 1px #888888;
+}
+.clear-button{
+    box-shadow: 1px 1px 1px 1px #888888;
+}
+.search-input{
+    height:22px;
+}
+.search-form{
+    margin-bottom: 10px;
+}
