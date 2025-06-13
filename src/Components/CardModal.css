@@ -22,7 +22,7 @@
   max-width: 550px;
   text-align: center;
   width: 80%;
-  box-shadow: 0 5px 15px rgba(166, 157, 157, 0.931);
+  box-shadow: 5px 5px 5px rgba(166, 157, 157, 0.931);
 }
 
 .close {

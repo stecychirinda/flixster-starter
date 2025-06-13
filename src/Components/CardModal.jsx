@@ -11,10 +11,10 @@ const CardModal = ({ movie, onClose }) => {
           src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
           alt={movie.title}
         />
-        <p>Runtime: {movie.runtime} minutes</p>
-        <p>Release date: {movie.release_date}</p>
-        <p>Overview: {movie.overview}</p>
-        <p>Genres: {movie.genres?.map((g) => g.name).join(",")}</p>
+        <p><strong>Runtime:</strong> {movie.runtime} minutes</p>
+        <p><strong>Release date:</strong> {movie.release_date}</p>
+        <p><strong>Overview:</strong> {movie.overview}</p>
+        <p><strong>Genres:</strong> {movie.genres?.map((g) => g.name).join(",")}</p>
         <MovieTrailer trailerKey={movie.trailerKey} />
         <button className="close" onClick={onClose}>
           Close

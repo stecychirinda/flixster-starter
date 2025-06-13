@@ -6,6 +6,8 @@ import Footer from "./Footer";
 import NavBar from "./NavBar";
 import FavoriteList from "./FavoriteList";
 import WatchedList from "./WatchedList";
+import * as FaIcons from "react-icons/fa";
+
 
 const apiSecret = import.meta.env.VITE_API_SECRET;
 
@@ -119,10 +121,12 @@ const App = () => {
         />;
     }
   };
-
   return (
     <div className="App">
-      <h1 className="Title">Welcome to Flixster</h1>
+      <h1 className="Title">
+        Welcome to FliX
+        <FaIcons.FaStar className="icon" />
+        </h1>
       <NavBar setCurrentPage={(page) => setCurrentPage(page)} />
       <div className="sort">
         <select
